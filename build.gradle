@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+version '1.0'
+
+
+//sourceCompatibility = 1.5
+//targetCompatibility = 1.8
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testCompile 'commons-beanutils:commons-beanutils:1.9.2'
+    testCompile 'org.apache.commons:commons-configuration2:2.0'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
+    testCompile 'org.testng:testng:6.7'
+    testCompile 'com.galenframework:galen-java-support:2.3.0'
+}
+
+
+test {
+    useTestNG()
+}
+
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.class" // whatever Ant pattern matches your test class files
+}
